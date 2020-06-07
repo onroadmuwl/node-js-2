@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" />
+
+    <link rel="stylesheet" href="./public/bootstrap.min.css">
+    <script src="./public/jquery.min.js"></script>
+    <script src="./public/bootstrap.bundle.min.js"></script>
+    <script src="./public/bootstrap-table.min.js"></script>
+    <script src="./public/bootstrap-table-zh-CN.min.js"></script>
+    <title>index</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg fixed-top  bg-info navbar-dark">
+            <a class="navbar-brand" href="#">我的主页</a>
+            <ul class="navbar-nav ">
+                <li class="active">
+                    <a class="nav-link" href="#">导航栏一</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#">导航栏二</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                    下拉列表
+                </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">子菜单一</a>
+                        <a class="dropdown-item" href="#">子菜单二</a>
+                    </div>
+                </li>
+            </ul>
+
+
+        </nav>
+        <br><br><br>
+        <div class="main_content">
+            <div>
+                <br>
+
+                <center>
+                    <h2>商品信息表</h2>
+                </center>
+
+                <br>
+                <div>
+                    <div class="col-md-6">
+                        <button class="btn btn-info" id="refresh">刷新</button>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#myModaladd" id="add">添加</button>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#myModalupdate" id="toUpdate">修改</button></div>
+                    <div class="col-md-6"></div>
+                    <!-- 模态框（Modal）新增 -->
+                    <div class="modal fade" id="myModaladd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="myModalLabel">
+                                        添加商品信息
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- <div class="form-group row">
+                                        <label for="name" class="col-sm-2 col-form-label">姓名：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="name" placeholder="请输入姓名">
+                                        </div>-->
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            <label for="code_a">编号:</label></div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" name="code_a" id="code_a" placeholder="输入商品编号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            <label for="name_a">名称:</label></div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" name="name_a" id="name_a" placeholder="输入商品名称">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            <label for="price_a">价格:</label></div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" name="price_a" id="price_a" placeholder="输入商品价格">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            <label for="company_a">公司:</label></div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" name="company_a" id="company_a" placeholder="输入商品所在公司">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="col-md-8">
+                                        <button type="button" class="btn btn-primary" id="addData">提交</button>&nbsp;
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></div>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+                    <!-- 模态框（Modal）修改 -->
+                    <div class="modal fade" id="myModalupdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="myModalLabel_1">
+                                        修改商品信息
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="myModalupdateForm">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <!--d-none:选择隐藏标签-->
+                                                <input type="text" class="form-control d-none" name="id_e" id="id_e" placeholder="请输入姓名">
+                                                <label for="code_a">编号:</label></div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="code_e" id="code_e" placeholder="输入商品编号">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <label for="name_a">名称:</label></div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="name_e" id="name_e" placeholder="输入商品名称">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <label for="price_a">价格:</label></div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="price_e" id="price_e" placeholder="输入商品价格">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <label for="company_a">公司:</label></div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="company_e" id="company_e" placeholder="输入商品所在公司">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="col-md-8">
+                                        <button type="button" class="btn btn-primary" id="update">提交修改</button>&nbsp;
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></div>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+
+                </div>
+                <table class=" table table-light" id="table">
+
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    /*以下是显示信息*/
+    $('#table').bootstrapTable({
+        url: 'form/get_form',
+        sidePagination: "true", //分页属性
+        striped: true, // 是否显示行间隔色
+        uniqueId: "id",
+        pageSize: "10", //如果设置了分页，页面数据条数
+        pagination: true, // 是否分页
+        sortable: false, // 是否启用排序
+        clickToSelect: true, //单选或多选框
+        columns: [{
+            checkbox: true
+        }, {
+            field: 'code',
+            title: '编号'
+        }, {
+            field: 'name',
+            title: '名称'
+        }, {
+            field: 'price',
+            title: '价格(元)'
+        }, {
+            field: 'company',
+            title: '公司'
+        }, {
+            field: '',
+            title: '操作',
+            width: 150,
+            align: 'center',
+            valign: 'middle',
+            formatter: function(value, row, index) {
+                return '<button type="button" class="btn btn-info del"  onclick=del(' + row.id + ')>删除</button>'
+            }
+        }, ]
+    })
+
+    /*以上是显示信息*/
+
+    /*以下是刷新*/
+    $('#refresh').on('click', function() {
+            $('#table').bootstrapTable('refresh');
+        })
+        /*以上是刷新*/
+
+
+    /*以下是新增*/
+    /*以上是新增*/
+
+    /*以下是修改*/
+    $('#toUpdate').on('click', function() {
+        var rows = $('#table').bootstrapTable('getAllSelections');
+        console.log(rows);
+        if (rows.length == 1) {
+            $('#myModalupdateForm #id_e').val(rows[0].id);
+            $('#myModalupdateForm #code_e').val(rows[0].code);
+            $('#myModalupdateForm #name_e').val(rows[0].name);
+            $('#myModalupdateForm #price_e').val(rows[0].price);
+            $('#myModalupdateForm #company_e').val(rows[0].company);
+        } else {
+            alert("请选择一行数据");
+            return false;
+        }
+    })
+    $('#update').on('click', function() {
+        $.ajax({
+            url: 'form/form_update',
+            type: 'post',
+            data: $('#myModalupdateForm').serialize(),
+            success: function(res) {
+                if (res.msg == 'wrong') {
+                    alert("数据库错误");
+                } else if (res.msg == 'success') {
+                    $("#myModalupdate").modal('hide');
+                    $('#table').bootstrapTable('refresh');
+                    alert("修改成功");
+
+                }
+            },
+            error: function() {
+                alert("修改异常");
+            }
+        })
+    })
+
+    /*以上是修改*/
+    $('#addData').on('click', function() {
+        var code = $('#code_a').val();
+        var name = $('#name_a').val();
+        var price = $('#price_a').val();
+        var company = $('#company_a').val();
+        if (code.length == 0) {
+            alert("编码不得为空");
+            return false;
+        } else if (isNaN(code)) {
+            alert("编码应为纯数字");
+            return false;
+        } else if (name.length == 0) {
+            alert("商品名称不应为空");
+            return false;
+        } else if (price.length == 0) {
+            alert("价格不得为空");
+            return false;
+        } else if (isNaN(price)) {
+            alert("价格应为纯数字");
+            return false;
+        } else if (company.length == 0) {
+            alert("公司名称不得为空");
+            return false;
+        } else {
+            $.ajax({
+                url: 'form/form_add',
+                type: 'post',
+                data: {
+                    code: code,
+                    name: name,
+                    price: price,
+                    company: company
+                },
+                success: function(res) {
+                    if (res.msg == 'wrong') {
+                        alert("数据库错误");
+                    } else if (res.msg == 'success') {
+                        $("#myModaladd").modal('hide');
+                        $('#table').bootstrapTable('refresh');
+                        $('#code_a').val('');
+                        $('#name_a').val('');
+                        $('#company_a').val('');
+                        $('#price_a').val('');
+                        alert("新增成功");
+
+                    }
+                },
+                error: function(err) {
+                    throw err;
+                    alert("新增异常");
+                }
+            })
+        }
+
+    })
+
+    /*以下是删除*/
+    function del(id) {
+        var message = "是否确认删除？删除后无法恢复！"
+        if (confirm(message)) {
+            $.ajax({
+                url: 'form/form_del',
+                type: 'post',
+                data: {
+                    id: id
+                },
+                success: function(res) {
+                    if (res.msg == 'success') {
+                        $('#table').bootstrapTable('refresh');
+                    } else if (res.msg == 'wrong') {
+                        alert("数据库错误");
+                    }
+                },
+                error: function() {
+                    alert("ajax出错！");
+                }
+            })
+
+        } else {
+            return false;
+        }
+    }
+    /*以上是删除*/
+</script>

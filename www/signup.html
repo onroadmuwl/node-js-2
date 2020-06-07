@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" />
+
+    <link rel="stylesheet" href="./public/bootstrap.min.css">
+    <script src="./public/jquery.min.js"></script>
+    <script src="./public/bootstrap.bundle.min.js"></script>
+
+    <title>Signup</title>
+
+    <style>
+        .box {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background-color: whitesmoke;
+            width: 500px;
+            height: 350px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="box Login">
+
+            <form>
+                <fieldset>
+                    <legend>用户注册</legend>
+                    <br>
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label for="username">用户名:</label></div>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" name="username" id="username" placeholder="用户名不得包含数字">
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label for="password">输入密码:</label></div>
+                        <div class="col-md-7">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="输入密码（最短六位字符）"></div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label for="password">再次输入:</label></div>
+                        <div class="col-md-7">
+                            <input type="password" class="form-control" name="password1" id="password1" placeholder="再次输入密码"></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-7 ">
+                            <a href="./login"><button type="button" class="btn btn-dark">返回</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-dark" id="signup">注册</button>
+                        </div>
+                        <div class="col-md-2"></div>
+
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</body>
+<script>
+    $('#signup').on('click', function() {
+        var reg = /\d/;
+        tests = reg.test($('#username').val());
+        if (tests == true || $('#username').val().length == 0) {
+            alert('用户名不得包含数字且不为空！');
+            return false;
+        } else if ($('#password1').val() != $('#password').val()) {
+            alert("前后两次密码不一致！");
+            return false;
+        } else if ($('#password1').val().length < 6) {
+            alert("密码长度不得小于6位！");
+            return false;
+        } else {
+            $.ajax({ //使用ajax的提交按钮类型要是button，不能是submit
+                type: 'post',
+                url: '/signup',
+                data: {
+                    username: $('#username').val(),
+                    password: $('#password').val()
+                },
+                timeout: 5000, // 5000ms,
+                success: function(result) {
+                    console.log(result);
+                    if (result.msg == 'exist') {
+                        alert("该用户已经存在！");
+                        $('#username').val('');
+                        $('#password').val('');
+                        $('#password1').val('');
+                        return false;
+                    } else if (result.msg == 'success') {
+                        alert("注册成功");
+                        window.location.href = result.url;
+                    } else if (result.msg == 'error') {
+                        alert("注册出错");
+                        return false;
+                    }
+
+                },
+                error: function() {
+                    alert("服务器出错！");
+                }
+
+            })
+        }
+
+
+    })
+</script>
+
+</html>
